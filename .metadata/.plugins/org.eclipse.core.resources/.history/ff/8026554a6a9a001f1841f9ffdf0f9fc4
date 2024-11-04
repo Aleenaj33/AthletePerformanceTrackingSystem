@@ -1,0 +1,19 @@
+package com.ustcapstone.atheleteservice.model;
+
+
+import lombok.Data;
+
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "coaches")
+@Data
+public class Coach {
+    @Id
+    private int coachId;
+    private String name;
+    private String sport;
+    private List<Integer> teamIds; // List of team IDs
+}

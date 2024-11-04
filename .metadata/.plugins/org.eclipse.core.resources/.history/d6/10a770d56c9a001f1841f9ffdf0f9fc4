@@ -1,0 +1,5 @@
+package com.ustcapstone.atheleteservice.controller;
+
+public class AthleteController {
+
+}

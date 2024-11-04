@@ -1,0 +1,5 @@
+package com.ustcapstone.atheleteservice.repository;
+
+public interface CoachRepository {
+
+}

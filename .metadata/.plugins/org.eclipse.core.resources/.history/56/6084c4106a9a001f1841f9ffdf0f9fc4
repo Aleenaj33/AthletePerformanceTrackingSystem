@@ -1,0 +1,5 @@
+package com.ustcapstone.atheleteservice.model;
+
+public class Coach {
+
+}

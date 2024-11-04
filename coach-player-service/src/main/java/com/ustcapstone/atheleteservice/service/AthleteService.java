@@ -4,8 +4,10 @@ package com.ustcapstone.atheleteservice.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ustcapstone.atheleteservice.interfaces.TeamFeignClient;
 import com.ustcapstone.atheleteservice.model.Coach;
 import com.ustcapstone.atheleteservice.model.Player;
+import com.ustcapstone.atheleteservice.model.Team;
 import com.ustcapstone.atheleteservice.repository.AthleteRepository;
 import com.ustcapstone.atheleteservice.repository.CoachRepository;
 
@@ -19,6 +21,17 @@ public class AthleteService {
 
     @Autowired
     private CoachRepository coachRepository;
+    @Autowired
+    private  TeamFeignClient teamFeignClient;
+
+   
+    public AthleteService(TeamFeignClient teamFeignClient) {
+        this.teamFeignClient = teamFeignClient;
+    }
+
+    public List<Team> getTeamsByCoachId(int coachId) {
+        return teamFeignClient.getTeamsByCoachId(coachId);
+    }
 
     // Player CRUD Operations
     public Player createPlayer(Player player) {

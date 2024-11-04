@@ -5,9 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import com.ustcapstone.atheleteservice.model.Coach;
 import com.ustcapstone.atheleteservice.model.Player;
+import com.ustcapstone.atheleteservice.model.Team;
 import com.ustcapstone.atheleteservice.service.AthleteService;
+
 
 import java.util.List;
 
@@ -17,6 +20,11 @@ public class AthleteController {
 
     @Autowired
     private AthleteService athleteService;
+    @GetMapping("/{coachId}/teams")
+    public ResponseEntity<List<Team>> getTeamsByCoachId(@PathVariable int coachId) {
+        List<Team> teams = athleteService.getTeamsByCoachId(coachId);
+        return ResponseEntity.ok(teams);
+    }
 
     // Player Endpoints
     @PostMapping("/players")
@@ -71,4 +79,6 @@ public class AthleteController {
         athleteService.deleteCoach(id);
         return ResponseEntity.noContent().build();
     }
+    
+   
 }

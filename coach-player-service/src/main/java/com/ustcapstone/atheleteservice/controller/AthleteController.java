@@ -20,6 +20,16 @@ public class AthleteController {
 
     @Autowired
     private AthleteService athleteService;
+    @GetMapping("/teamIds/{coachId}")
+    public ResponseEntity<List<Integer>> getTeamIdsByCoachId(@PathVariable int coachId) {
+        List<Integer> teamIds = athleteService.getTeamIdsByCoachId(coachId);
+        return ResponseEntity.ok(teamIds);
+    }
+    @PutMapping("/update-teams/{coachId}")
+    public ResponseEntity<Void> updateCoachTeamIds(@PathVariable int coachId, @RequestBody List<Integer> teamIds) {
+        athleteService.updateTeamIds(coachId, teamIds);
+        return ResponseEntity.ok().build();
+    }
     @GetMapping("/{coachId}/teams")
     public ResponseEntity<List<Team>> getTeamsByCoachId(@PathVariable int coachId) {
         List<Team> teams = athleteService.getTeamsByCoachId(coachId);
@@ -29,6 +39,7 @@ public class AthleteController {
     public void updatePlayersTeamId(@PathVariable int teamId, @RequestBody List<Integer> playerIds) {
         athleteService.updatePlayersTeamId(teamId, playerIds);
     }
+   
     
     
     //added by me

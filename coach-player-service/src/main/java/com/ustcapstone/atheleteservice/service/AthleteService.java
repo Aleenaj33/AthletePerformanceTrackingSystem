@@ -30,6 +30,17 @@ public class AthleteService {
         this.teamFeignClient = teamFeignClient;
     }
     //added by me
+    public List<Integer> getTeamIdsByCoachId(int coachId) {
+        Coach coach = coachRepository.findById(coachId)
+                .orElseThrow(() -> new RuntimeException("Coach not found for ID: " + coachId));
+        return coach.getTeamIds(); // Return the list of team IDs
+    }
+    public void updateTeamIds(int coachId, List<Integer> teamIds) {
+        Coach coach = coachRepository.findById(coachId)
+                .orElseThrow(() -> new RuntimeException("Coach not found for ID: " + coachId));
+        coach.setTeamIds(teamIds); // Update the list of team IDs
+        coachRepository.save(coach); // Save the changes
+    }
    
         public List<Player> getPlayersByTeamId(int teamId) {
             return athleteRepository.findByTeamId(teamId);

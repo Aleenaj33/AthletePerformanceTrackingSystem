@@ -3,6 +3,9 @@ package com.ustcapstone.atheleteservice.model;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -15,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor 
 public class Player {
-	 @Id
+	    @Id
 	    private int playerId;
 	    private String name;
 	    private String sport;

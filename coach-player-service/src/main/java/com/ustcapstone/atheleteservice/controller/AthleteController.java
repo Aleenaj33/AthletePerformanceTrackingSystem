@@ -5,9 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import com.ustcapstone.atheleteservice.model.Coach;
 import com.ustcapstone.atheleteservice.model.Player;
+import com.ustcapstone.atheleteservice.model.Team;
 import com.ustcapstone.atheleteservice.service.AthleteService;
+
 
 import java.util.List;
 
@@ -17,6 +20,30 @@ public class AthleteController {
 
     @Autowired
     private AthleteService athleteService;
+    @GetMapping("/{coachId}/teams")
+    public ResponseEntity<List<Team>> getTeamsByCoachId(@PathVariable int coachId) {
+        List<Team> teams = athleteService.getTeamsByCoachId(coachId);
+        return ResponseEntity.ok(teams);
+    }
+    @PutMapping("/update-team/{teamId}")
+    public void updatePlayersTeamId(@PathVariable int teamId, @RequestBody List<Integer> playerIds) {
+        athleteService.updatePlayersTeamId(teamId, playerIds);
+    }
+    
+    
+    //added by me
+    @GetMapping("/players/{playerId}/team-members")
+    public ResponseEntity<List<Player>> getTeamMembersByPlayerId(@PathVariable int playerId) {
+        List<Player> players = athleteService.getPlayersByPlayerId(playerId);
+        return ResponseEntity.ok(players);
+    }
+    
+    @GetMapping("/team/{teamId}/players")
+    public ResponseEntity<List<Player>> getPlayersByTeamId(@PathVariable int teamId) {
+        List<Player> players = athleteService.getPlayersByTeamId(teamId);
+        return ResponseEntity.ok(players);
+    }
+    //added by me
 
     // Player Endpoints
     @PostMapping("/players")
@@ -71,4 +98,6 @@ public class AthleteController {
         athleteService.deleteCoach(id);
         return ResponseEntity.noContent().build();
     }
+    
+   
 }

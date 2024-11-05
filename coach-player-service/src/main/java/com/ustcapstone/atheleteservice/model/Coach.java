@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "coaches")
@@ -19,5 +20,6 @@ public class Coach {
     private int coachId;
     private String name;
     private String sport;
+  
     private List<Integer> teamIds; // List of team IDs
 }

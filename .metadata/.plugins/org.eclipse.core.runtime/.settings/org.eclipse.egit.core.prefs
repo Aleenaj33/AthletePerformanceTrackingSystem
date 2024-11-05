@@ -1,4 +1,4 @@
-GitRepositoriesView.GitDirectories=D\:\\javaspringboottraining\\.git;
-GitRepositoriesView.GitDirectories.relative=D\:\\javaspringboottraining\\.git;
+GitRepositoriesView.GitDirectories=D\:\\javaspringboottraining\\.git;D\:\\UST_Capstone-project\\code\\.git;
+GitRepositoriesView.GitDirectories.relative=D\:\\javaspringboottraining\\.git;.git;
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

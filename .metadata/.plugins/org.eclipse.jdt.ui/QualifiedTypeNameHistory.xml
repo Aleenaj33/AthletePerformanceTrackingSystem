@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="jakarta.persistence.ElementCollection"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.mapping.Document"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.repository.AthleteRepository"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.repository.CoachRepository"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.service.AthleteService"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.model.Player"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.model.Coach"/>
+    <fullyQualifiedTypeName name="org.springframework.data.annotation.Id"/>
+</qualifiedTypeNameHistroy>

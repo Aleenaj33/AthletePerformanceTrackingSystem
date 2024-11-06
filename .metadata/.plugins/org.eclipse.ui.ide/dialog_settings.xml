@@ -38,6 +38,8 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\UST-CapstoneProject\coach-player-service"/>
+			<item value="D:\UST-CapstoneProject\teams-service"/>
 			<item value="D:\javaspringboottraining\productapi2-mysql"/>
 			<item value="D:\javaspringboottraining\productapi-feignclient"/>
 			<item value="D:\javaspringboottraining\productapi2-mongodb"/>

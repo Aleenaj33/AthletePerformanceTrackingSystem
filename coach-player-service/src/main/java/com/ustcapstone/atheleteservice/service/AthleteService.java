@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ustcapstone.atheleteservice.interfaces.TeamFeignClient;
+import com.ustcapstone.atheleteservice.interfaces.TrainingSessionFeignClient;
 import com.ustcapstone.atheleteservice.model.Coach;
 import com.ustcapstone.atheleteservice.model.Player;
 import com.ustcapstone.atheleteservice.model.Team;
+import com.ustcapstone.atheleteservice.model.TrainingSession;
 import com.ustcapstone.atheleteservice.repository.AthleteRepository;
 import com.ustcapstone.atheleteservice.repository.CoachRepository;
 
@@ -24,12 +26,26 @@ public class AthleteService {
     private CoachRepository coachRepository;
     @Autowired
     private  TeamFeignClient teamFeignClient;
+    
+    @Autowired  // Injects TrainingSessionFeignClient into AthleteService
+    private TrainingSessionFeignClient trainingSessionFeignClient;
 
    
     public AthleteService(TeamFeignClient teamFeignClient) {
         this.teamFeignClient = teamFeignClient;
     }
     //added by me
+    public List<Integer> getTeamIdsByCoachId(int coachId) {
+        Coach coach = coachRepository.findById(coachId)
+                .orElseThrow(() -> new RuntimeException("Coach not found for ID: " + coachId));
+        return coach.getTeamIds(); // Return the list of team IDs
+    }
+    public void updateTeamIds(int coachId, List<Integer> teamIds) {
+        Coach coach = coachRepository.findById(coachId)
+                .orElseThrow(() -> new RuntimeException("Coach not found for ID: " + coachId));
+        coach.setTeamIds(teamIds); // Update the list of team IDs
+        coachRepository.save(coach); // Save the changes
+    }
    
         public List<Player> getPlayersByTeamId(int teamId) {
             return athleteRepository.findByTeamId(teamId);
@@ -100,5 +116,14 @@ public class AthleteService {
 
     public void deleteCoach(int id) {
         coachRepository.deleteById(id);
+    }
+    
+    
+    public List<TrainingSession> getTrainingSessionsByPlayerId(int playerId) {
+        return trainingSessionFeignClient.getSessionsByPlayerId(playerId);
+    }
+
+    public List<TrainingSession> getTrainingSessionsByCoachId(int coachId) {
+        return trainingSessionFeignClient.getSessionsByCoachId(coachId);
     }
 }

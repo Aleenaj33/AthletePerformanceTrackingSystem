@@ -7,44 +7,39 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.team_service.interfaces.AthleteFeignClient;
+
 import com.example.team_service.model.Player;
 import com.example.team_service.model.Team;
 import com.example.team_service.repository.TeamRepository;
 
-
-
-
-
 @Service
 public class TeamService {
-	@Autowired
-    private AthleteFeignClient athleteFeignClient;
+    private final TeamRepository teamRepository;
+    private final AthleteFeignClient athleteFeignClient;
+   
 
+   
+    public TeamService(TeamRepository teamRepository, AthleteFeignClient athleteFeignClient) {
+        this.teamRepository = teamRepository;
+        this.athleteFeignClient = athleteFeignClient;
+        
+    }
+
+    // Get players by team ID
     public List<Player> getPlayersByTeamId(int teamId) {
-        // Calls AthleteService via Feign client to fetch players for a team
         return athleteFeignClient.getPlayersByTeamId(teamId);
     }
 
-    private final TeamRepository teamRepository;
+    // Get teams by coach ID
     public List<Team> getTeamsByCoachId(int coachId) {
         return teamRepository.findByCoachId(coachId);
     }
-
- 
-    public TeamService(TeamRepository teamRepository) {
-        this.teamRepository = teamRepository;
-    }
-
 
     // Get team by ID
     public Team getTeamById(int teamId) {
         return teamRepository.findById(teamId)
             .orElseThrow(() -> new RuntimeException("Team not found"));
     }
-
-   
-
-   
 
     // Get all teams
     public List<Team> getAllTeams() {
@@ -71,9 +66,12 @@ public class TeamService {
     public List<Team> findTeamsBySportCategory(String sportCategory) {
         return teamRepository.findBySportCategory(sportCategory);
     }
+
+    // Create a new team
     @Transactional
     public Team createTeam(Team team) {
         Team createdTeam = teamRepository.save(team);
+        updateCoachTeams(team.getCoachId(), createdTeam.getTeamId(), true);
         updatePlayersTeamId(createdTeam.getTeamId(), team.getPlayerIds());
         return createdTeam;
     }
@@ -92,7 +90,10 @@ public class TeamService {
 
         // Save the updated team
         teamRepository.save(existingTeam);
-
+        
+        // Update coach's team IDs
+        updateCoachTeams(existingTeam.getCoachId(), teamId, false);
+        
         // Update players' teamId
         updatePlayersTeamId(existingTeam.getTeamId(), updatedTeam.getPlayerIds());
 
@@ -107,12 +108,32 @@ public class TeamService {
 
         // Remove teamId from players
         athleteFeignClient.removePlayersTeamId(teamId);
+
+        // Update coach's team IDs to remove the deleted team
+        updateCoachTeams(team.getCoachId(), teamId, false);
+
+        // Delete the team from the repository
         teamRepository.delete(team);
     }
 
     // Helper method to update players' teamId
     private void updatePlayersTeamId(int teamId, List<Integer> playerIds) {
         athleteFeignClient.updatePlayersTeamId(teamId, playerIds);
+    }
+
+    // Helper method to update coach's teamIds
+    private void updateCoachTeams(int coachId, int teamId, boolean isAdding) {
+        List<Integer> currentTeamIds = athleteFeignClient.getTeamIdsByCoachId(coachId);
+        
+        if (isAdding) {
+            if (!currentTeamIds.contains(teamId)) {
+                currentTeamIds.add(teamId); // Add teamId if creating a new team
+            }
+        } else {
+            currentTeamIds.remove(Integer.valueOf(teamId)); // Remove teamId if deleting/updating a team
+        }
+        
+        athleteFeignClient.updateCoachTeamIds(coachId, currentTeamIds);
     }
 }
 

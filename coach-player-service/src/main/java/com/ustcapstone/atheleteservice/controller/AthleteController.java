@@ -5,10 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+import com.ustcapstone.atheleteservice.interfaces.GoalServiceFeignClient;
+import com.ustcapstone.atheleteservice.interfaces.TrainingSessionFeignClient;
 import com.ustcapstone.atheleteservice.model.Coach;
 import com.ustcapstone.atheleteservice.model.Player;
+import com.ustcapstone.atheleteservice.model.PlayerGoal;
 import com.ustcapstone.atheleteservice.model.Team;
+import com.ustcapstone.atheleteservice.model.TrainingSession;
 import com.ustcapstone.atheleteservice.service.AthleteService;
 
 
@@ -17,6 +20,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/athletes")
 public class AthleteController {
+	
+	@Autowired
+    private TrainingSessionFeignClient trainingSessionFeignClient;
 
     @Autowired
     private AthleteService athleteService;
@@ -109,6 +115,48 @@ public class AthleteController {
         athleteService.deleteCoach(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/training-sessions/player/{playerId}")
+    public ResponseEntity<List<TrainingSession>> getTrainingSessionsByPlayerId(@PathVariable int playerId) {
+        List<TrainingSession> sessions = athleteService.getTrainingSessionsByPlayerId(playerId);
+        return ResponseEntity.ok(sessions);
+    }
+
+    @GetMapping("/training-sessions/coach/{coachId}")
+    public ResponseEntity<List<TrainingSession>> getTrainingSessionsByCoachId(@PathVariable int coachId) {
+        List<TrainingSession> sessions = athleteService.getTrainingSessionsByCoachId(coachId);
+        return ResponseEntity.ok(sessions);
+    }
+    //*******************************************************************
+    
+    @Autowired
+    private GoalServiceFeignClient goalServiceClient;
+
+    // Endpoint to get all goals for a player
+    @GetMapping("/player/{playerId}/goals")
+    public List<PlayerGoal> getGoalsForPlayer(@PathVariable int playerId) {
+        return goalServiceClient.getGoalsByPlayerId(playerId);
+    }
+
+    // Endpoint to get all goals given by a specific coach
+    @GetMapping("/coach/{coachId}/goals")
+    public List<PlayerGoal> getGoalsForCoach(@PathVariable int coachId) {
+        return goalServiceClient.getGoalsByCoachId(coachId);
+    }
+
+    // Endpoint to get a specific goal by goalId
+    @GetMapping("/goal/{goalId}")
+    public PlayerGoal getGoalById(@PathVariable int goalId) {
+        return goalServiceClient.getGoalById(goalId);
+    }
+
+    // Endpoint to update a goal
+    @PutMapping("/goal/{goalId}")
+    public PlayerGoal updateGoal(@PathVariable int goalId, @RequestBody PlayerGoal updatedGoal) {
+        return goalServiceClient.updateGoal(goalId, updatedGoal);
+    }
+    
+    
+    //*******************************************************************
     
    
 }

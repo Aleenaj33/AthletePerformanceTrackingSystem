@@ -23,7 +23,11 @@ public class Player {
 	    private String name;
 	    private String sport;
 	    private int teamId; // Reference to Team in TeamService
+<<<<<<< HEAD
 	    
+=======
+//	    private List<String> performanceMetrics;
+>>>>>>> 0f06320c22ba5735a1c7c021f9f28003f77db70e
 	
 
 }

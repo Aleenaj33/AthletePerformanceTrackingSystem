@@ -24,6 +24,11 @@ public class TeamService {
         this.athleteFeignClient = athleteFeignClient;
         
     }
+    public List<Integer> getPlayerIdsByTeamId(int teamId) {
+        return teamRepository.findByTeamId(teamId)
+            .map(Team::getPlayerIds)
+            .orElseThrow(() -> new RuntimeException("Team not found with ID: " + teamId));
+    }
 
     // Get players by team ID
     public List<Player> getPlayersByTeamId(int teamId) {

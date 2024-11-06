@@ -25,4 +25,7 @@ public interface GoalServiceFeignClient {
  // Update a goal by goalId
  @PutMapping("/{goalId}")
  PlayerGoal updateGoal(@PathVariable("goalId") int goalId, @RequestBody PlayerGoal updatedGoal);
+ 
+ @DeleteMapping("/{goalId}")
+ void deleteGoal(@PathVariable int goalId);
 }

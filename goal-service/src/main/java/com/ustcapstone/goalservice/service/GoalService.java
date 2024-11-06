@@ -47,7 +47,11 @@ public class GoalService {
 	        // Save and return the updated goal
 	        return goalRepository.save(existingGoal);
 	    }
-	 
+	    
+	    
+	    public void deleteGoal(int goalId) {
+	        goalRepository.deleteById(goalId);
+	    }
 	 
 
     // Fetch goals for a player by player ID
@@ -62,10 +66,6 @@ public class GoalService {
     }
 
 
-    // Delete goal by goalId
-    public void deleteGoal(int goalId) {
-        goalRepository.deleteById(goalId);
-    }
-    
+  
     
 }

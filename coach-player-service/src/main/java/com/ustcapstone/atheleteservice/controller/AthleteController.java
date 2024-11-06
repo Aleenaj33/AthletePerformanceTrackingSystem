@@ -154,7 +154,11 @@ public class AthleteController {
     public PlayerGoal updateGoal(@PathVariable int goalId, @RequestBody PlayerGoal updatedGoal) {
         return goalServiceClient.updateGoal(goalId, updatedGoal);
     }
-    
+    @DeleteMapping("/goal/{goalId}")
+    public String deleteGoal(@PathVariable int goalId) {
+        goalServiceClient.deleteGoal(goalId);
+        return "Goal with ID " + goalId + " has been deleted.";
+    }
     
     //*******************************************************************
     

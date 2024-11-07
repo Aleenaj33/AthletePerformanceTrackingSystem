@@ -24,4 +24,6 @@
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.interfaces.GoalServiceFeignClient"/>
     <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.model.PlayerGoal"/>
+    <fullyQualifiedTypeName name="org.springframework.cloud.netflix.eureka.server.EnableEurekaServer"/>
+    <fullyQualifiedTypeName name="org.springframework.cloud.client.discovery.EnableDiscoveryClient"/>
 </qualifiedTypeNameHistroy>

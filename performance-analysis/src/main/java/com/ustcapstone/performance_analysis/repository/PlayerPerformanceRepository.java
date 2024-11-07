@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.ustcapstone.performance_analysis.model.PlayerPerformance;
 
-public interface PlayerPerformanceRepository extends MongoRepository<PlayerPerformance, String> {
+public interface PlayerPerformanceRepository extends MongoRepository<PlayerPerformance, Integer> {
     List<PlayerPerformance> findByPlayerId(int playerId);
 }

@@ -35,7 +35,7 @@ public class PerformanceService {
 
     // Submit performance metrics for a player
     public PlayerPerformance submitPlayerPerformance(PlayerPerformance playerPerformance) {
-        playerPerformance.setRecordDateTime(LocalDateTime.now());
+        playerPerformance.setRecordDateTime(LocalDateTime.now().toString());
         // Save the player's performance data
         return performanceRepository.save(playerPerformance);
     }

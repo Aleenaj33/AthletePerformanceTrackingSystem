@@ -24,5 +24,9 @@ public class Player {
 	    private String sport;
 	    private int teamId; // Reference to Team in TeamService
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> ecbe57c16e4c2bc1bb20b939069fc2eaf97cbc6d
 
 }

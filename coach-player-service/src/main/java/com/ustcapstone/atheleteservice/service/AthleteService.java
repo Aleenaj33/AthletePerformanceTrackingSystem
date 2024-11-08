@@ -15,6 +15,7 @@ import com.ustcapstone.atheleteservice.repository.CoachRepository;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AthleteService {
@@ -125,5 +126,31 @@ public class AthleteService {
 
     public List<TrainingSession> getTrainingSessionsByCoachId(int coachId) {
         return trainingSessionFeignClient.getSessionsByCoachId(coachId);
+    }
+    
+    public int getTeamIdByPlayerId(int playerId) {
+        Player player = athleteRepository.findById(playerId)
+            .orElseThrow(() -> new RuntimeException("Player not found for player ID: " + playerId));
+        return player.getTeamId();
+    }
+    public List<Player> getUnassignedPlayers() {
+        return athleteRepository.findByTeamId(0);
+    }
+    
+    public Coach getCoachForPlayer(int playerId) {
+        // Fetch the Player from player-coach service by playerId
+        Player player = athleteRepository.findById(playerId)
+                .orElseThrow(() -> new RuntimeException("Player not found"));
+
+        // Fetch the Team using teamId from the Player
+        int teamId = player.getTeamId();
+        Team team = teamFeignClient.getTeamById(teamId);  // Call Team microservice
+
+        // Get the coachId from the Team
+        int coachId = team.getCoachId();
+        
+        // Fetch the Coach using coachId
+        return coachRepository.findById(coachId)
+                .orElseThrow(() -> new RuntimeException("Coach not found"));
     }
 }

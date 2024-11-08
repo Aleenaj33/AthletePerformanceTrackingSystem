@@ -14,6 +14,11 @@ public interface TeamFeignClient{
 
     @GetMapping("/by-coach/{coachId}")
     List<Team> getTeamsByCoachId(@PathVariable("coachId") int coachId);
+    
+    @GetMapping("/teams/player/{playerId}")
+    Team getTeamByPlayerId(@PathVariable int playerId);
+    @GetMapping("/{teamId}")
+    Team getTeamById(@PathVariable int teamId);
  
     
     

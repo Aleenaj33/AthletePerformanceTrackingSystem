@@ -6,10 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ustcapstone.atheleteservice.interfaces.GoalServiceFeignClient;
+import com.ustcapstone.atheleteservice.interfaces.PerformanceFeignClient;
+import com.ustcapstone.atheleteservice.interfaces.TeamFeignClient;
 import com.ustcapstone.atheleteservice.interfaces.TrainingSessionFeignClient;
 import com.ustcapstone.atheleteservice.model.Coach;
 import com.ustcapstone.atheleteservice.model.Player;
 import com.ustcapstone.atheleteservice.model.PlayerGoal;
+import com.ustcapstone.atheleteservice.model.PlayerPerformance;
+import com.ustcapstone.atheleteservice.model.PlayerPerformanceReport;
 import com.ustcapstone.atheleteservice.model.Team;
 import com.ustcapstone.atheleteservice.model.TrainingSession;
 import com.ustcapstone.atheleteservice.service.AthleteService;
@@ -161,6 +165,51 @@ public class AthleteController {
     }
     
     //*******************************************************************
+    // Player Endpoints
+    @Autowired
+    private PerformanceFeignClient performanceFeignClient;
+    
+    
+
+    @GetMapping("/player/{playerId}/metrics")
+    public List<PlayerPerformance> getPlayerMetrics(@PathVariable int playerId) {
+        return performanceFeignClient.getAllMetricsByPlayerId(playerId);
+    }
+
+    @GetMapping("/player/{playerId}/reports")
+    public List<PlayerPerformanceReport> getPlayerReports(@PathVariable int playerId) {
+        return performanceFeignClient.getAllReportsByPlayerId(playerId);
+    }
+
+    @GetMapping("/player/{playerId}/teammates-reports")
+    public List<PlayerPerformanceReport> getTeammatesReports(@PathVariable int playerId) {
+        int teamId =  athleteService.getTeamIdByPlayerId(playerId);
+        return performanceFeignClient.getTeamPerformanceReports(teamId);
+    }
+
+    // Coach Endpoints
+
+    @PostMapping("/coach/player/{playerId}/metrics")
+    public ResponseEntity<String> uploadMetricsForPlayer(@PathVariable int playerId, @RequestBody PlayerPerformance metrics) {
+        performanceFeignClient.addPlayerMetrics(metrics);
+        return ResponseEntity.ok("Metrics uploaded successfully");
+    }
+
+    @GetMapping("/coach/team/{teamId}/reports")
+    public List<PlayerPerformanceReport> getTeamReports(@PathVariable int teamId) {
+        return performanceFeignClient.getTeamPerformanceReports(teamId);
+    }
+    @GetMapping("/players/unassigned")
+    public ResponseEntity<List<Player>> getUnassignedPlayers() {
+        List<Player> unassignedPlayers = athleteService.getUnassignedPlayers();
+        return ResponseEntity.ok(unassignedPlayers);
+    }
+    
+    @GetMapping("/{playerId}/coach")
+    public ResponseEntity<Coach> getCoachForPlayer(@PathVariable int playerId) {
+        Coach coach = athleteService.getCoachForPlayer(playerId);
+        return ResponseEntity.ok(coach);
+    }
     
    
 }

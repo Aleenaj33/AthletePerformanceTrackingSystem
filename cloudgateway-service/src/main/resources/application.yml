@@ -1,0 +1,68 @@
+server:
+  port: 8089  # Gateway's port
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        # Route to Athlete Service
+        - id: coach-player-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/athletes/**
+
+        # Route to Team Service
+        - id: teams-service
+          uri: http://localhost:8091
+          predicates:
+            - Path=/api/teams/**
+
+        # Route to Goal Service
+        - id: goal-service
+          uri: http://localhost:8094
+          predicates:
+            - Path=/api/goals/**
+
+        # Route to Performance Service
+        - id: performance-analysis
+          uri: http://localhost:8093
+          predicates:
+            - Path=/api/performance/**
+
+        # Route to Training Session Service
+        - id: trainingsession-service
+          uri: http://localhost:8092
+          predicates:
+            - Path=/api/training-sessions/**
+
+    discovery:
+      locator:
+        enabled: true
+        lower-case-service-id: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+# Enabling CORS to allow requests from Angular frontend
+# Adjust "allowedOrigins" as per your frontend's URL.
+cors:
+  allowedOrigins: "http://localhost:4200"
+  allowedMethods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+  allowedHeaders:
+    - Authorization
+    - Content-Type
+    - X-Requested-With
+  allowCredentials: true

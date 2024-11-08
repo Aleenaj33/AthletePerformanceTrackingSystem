@@ -21,11 +21,13 @@ import java.util.List;
 @RequestMapping("/api/athletes")
 public class AthleteController {
 	
-	@Autowired
-    private TrainingSessionFeignClient trainingSessionFeignClient;
+
 
     @Autowired
     private AthleteService athleteService;
+    
+    
+    //********************************************************************************
     @GetMapping("/teamIds/{coachId}")
     public ResponseEntity<List<Integer>> getTeamIdsByCoachId(@PathVariable int coachId) {
         List<Integer> teamIds = athleteService.getTeamIdsByCoachId(coachId);
@@ -60,7 +62,8 @@ public class AthleteController {
         List<Player> players = athleteService.getPlayersByTeamId(teamId);
         return ResponseEntity.ok(players);
     }
-    //added by me
+    
+    //*****************************************************************************************
 
     // Player Endpoints
     @PostMapping("/players")
@@ -78,16 +81,17 @@ public class AthleteController {
         return ResponseEntity.ok(athleteService.getPlayerById(id));
     }
 
-    @PutMapping("/players")
-    public ResponseEntity<Player> updatePlayer(@RequestBody Player player) {
-        return ResponseEntity.ok(athleteService.updatePlayer(player));
-    }
+//    @PutMapping("/players")
+//    public ResponseEntity<Player> updatePlayer(@RequestBody Player player) {
+//        return ResponseEntity.ok(athleteService.updatePlayer(player));
+//    }
 
     @DeleteMapping("/players/{id}")
     public ResponseEntity<Void> deletePlayer(@PathVariable int id) {
         athleteService.deletePlayer(id);
         return ResponseEntity.noContent().build();
     }
+    //***************************************************************************
 
     // Coach Endpoints
     @PostMapping("/coaches")
@@ -115,7 +119,13 @@ public class AthleteController {
         athleteService.deleteCoach(id);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/training-sessions/player/{playerId}")
+    
+    //*********************************************************************************************
+	//@Autowired
+    //private TrainingSessionFeignClient trainingSessionFeignClient;
+	
+	
+	@GetMapping("/training-sessions/player/{playerId}")
     public ResponseEntity<List<TrainingSession>> getTrainingSessionsByPlayerId(@PathVariable int playerId) {
         List<TrainingSession> sessions = athleteService.getTrainingSessionsByPlayerId(playerId);
         return ResponseEntity.ok(sessions);
@@ -161,6 +171,26 @@ public class AthleteController {
     }
     
     //*******************************************************************
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //************************************************************************
     
    
 }

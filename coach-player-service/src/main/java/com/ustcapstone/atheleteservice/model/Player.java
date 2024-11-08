@@ -1,10 +1,10 @@
 package com.ustcapstone.atheleteservice.model;
 
-import java.util.List;
+//import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
+
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,10 +23,5 @@ public class Player {
 	    private String name;
 	    private String sport;
 	    private int teamId; // Reference to Team in TeamService
-
-<<<<<<< HEAD
-=======
-	
->>>>>>> ecbe57c16e4c2bc1bb20b939069fc2eaf97cbc6d
 
 }

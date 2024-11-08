@@ -1777,3 +1777,28 @@
 2024-11-07 09:48:00,097 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2024-11-07 09:48:00,120 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-11-07 09:48:00,127 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\USTCAPSTONEPROJECT\projectcode\coach-player-service\src\test\resources
+2024-11-07 09:51:21,886 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-11-07 09:51:21,898 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-11-07 09:51:21,903 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\USTCAPSTONEPROJECT\projectcode\coach-player-service\src\test\resources
+2024-11-07 09:51:35,668 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-11-07 09:51:35,722 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-11-07 09:51:35,729 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\USTCAPSTONEPROJECT\projectcode\coach-player-service\src\test\resources
+2024-11-07 09:51:43,446 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-11-07 09:51:43,513 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-11-07 09:51:43,517 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\USTCAPSTONEPROJECT\projectcode\coach-player-service\src\test\resources
+2024-11-07 09:51:56,069 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-11-07 09:51:56,079 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-11-07 09:51:56,083 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\USTCAPSTONEPROJECT\projectcode\coach-player-service\src\test\resources
+2024-11-07 09:58:58,126 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-11-07 09:58:58,137 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-11-07 09:58:58,141 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\USTCAPSTONEPROJECT\projectcode\coach-player-service\src\test\resources
+2024-11-07 10:02:29,528 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-11-07 10:02:29,540 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-11-07 10:02:29,544 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\USTCAPSTONEPROJECT\projectcode\coach-player-service\src\test\resources
+2024-11-07 11:48:17,022 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.6; built: 2024-01-30T02:43:24.387Z; git: 78ab6e6ba163f89cdd97f2ae0283fbb5e371cfaf; jvm 17.0.11+9
+2024-11-07 11:48:17,125 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@56b6af33{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@183be94f{STARTED}}
+2024-11-07 11:48:17,127 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2024-11-07 11:48:17,183 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@6ad3278e{HTTP/1.1, (http/1.1)}{127.0.0.1:54844}
+2024-11-07 11:48:17,217 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@6fa716ae{STARTING}[12.0.6,sto=0] @6705567ms
+2024-11-08 09:19:45,861 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@6fa716ae{STOPPING}[12.0.6,sto=0]
+2024-11-08 09:19:45,896 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@6ad3278e{HTTP/1.1, (http/1.1)}{127.0.0.1:0}

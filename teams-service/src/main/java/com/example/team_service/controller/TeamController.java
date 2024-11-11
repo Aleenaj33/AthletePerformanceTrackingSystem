@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.team_service.interfaces.AthleteFeignClient;
+
 import com.example.team_service.model.Player;
 import com.example.team_service.model.Team;
 import com.example.team_service.service.TeamService;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/teams")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TeamController {
 
     private final TeamService teamService;

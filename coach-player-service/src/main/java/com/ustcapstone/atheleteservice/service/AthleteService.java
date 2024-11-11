@@ -51,6 +51,7 @@ public class AthleteService {
         public List<Player> getPlayersByTeamId(int teamId) {
             return athleteRepository.findByTeamId(teamId);
         }
+        
         public List<Player> getPlayersByPlayerId(int playerId) {
             // Fetch the player using the playerId
             Player player = athleteRepository.findById(playerId).orElse(null);

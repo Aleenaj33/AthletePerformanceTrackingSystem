@@ -66,3 +66,4 @@ cors:
     - Content-Type
     - X-Requested-With
   allowCredentials: true
+

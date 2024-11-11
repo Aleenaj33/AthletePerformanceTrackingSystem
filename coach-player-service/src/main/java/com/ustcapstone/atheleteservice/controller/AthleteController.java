@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/athletes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AthleteController {
 	
 
@@ -47,6 +48,10 @@ public class AthleteController {
     public void updatePlayersTeamId(@PathVariable int teamId, @RequestBody List<Integer> playerIds) {
         athleteService.updatePlayersTeamId(teamId, playerIds);
     }
+    @GetMapping("/team/{teamId}")
+    public List<Player> getPlayersByTeamId(@PathVariable int teamId) {
+        return athleteService.getPlayersByTeamId(teamId);
+    }
    
     
     
@@ -57,12 +62,12 @@ public class AthleteController {
         return ResponseEntity.ok(players);
     }
     
-    @GetMapping("/team/{teamId}/players")
-    public ResponseEntity<List<Player>> getPlayersByTeamId(@PathVariable int teamId) {
-        List<Player> players = athleteService.getPlayersByTeamId(teamId);
-        return ResponseEntity.ok(players);
-    }
-    
+//    @GetMapping("/team/{teamId}/players")
+//    public ResponseEntity<List<Player>> getPlayersByTeamId(@PathVariable int teamId) {
+//        List<Player> players = athleteService.getPlayersByTeamId(teamId);
+//        return ResponseEntity.ok(players);
+//    }
+//    
     //*****************************************************************************************
 
     // Player Endpoints

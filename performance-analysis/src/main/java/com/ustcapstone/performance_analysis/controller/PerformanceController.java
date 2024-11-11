@@ -19,30 +19,26 @@ import com.ustcapstone.performance_analysis.service.PerformanceService;
 public class PerformanceController {
 
     @Autowired
-    private PerformanceService performanceService;
+    private PerformanceService performanceService;  
 
-   
-
-    // Endpoint to fetch performance report for a specific player (based on average metrics)
-    @GetMapping("/player/{playerId}/finalreport")
-    public PlayerPerformanceReport getPlayerPerformanceReport(@PathVariable int playerId) {
-        List<PlayerPerformance> performances = performanceService.getPlayerPerformanceByPlayerId(playerId);
-        return performanceService.generateReport(performances);
-    }
-    @GetMapping("/getallmetrics/{playerId}")
+    @GetMapping("/player/{playerId}/metrics")
     public List<PlayerPerformance> getAllMetricsByPlayerId(@PathVariable int playerId) {
         return performanceService.getAllMetricsByPlayerId(playerId);
     }
+
+    // Endpoint to get all historical reports for a player
+    @GetMapping("/player/{playerId}/reports")
+    public List<PlayerPerformanceReport> getAllReportsForPlayer(@PathVariable int playerId) {
+        return performanceService.getAllReportsByPlayerId(playerId);
+    }
+
+    // Endpoint to add metrics and generate report for a single performance
     @PostMapping("/add")
     public PlayerPerformanceReport addPerformanceAndGenerateReport(@RequestBody PlayerPerformance performance) {
         return performanceService.generateAndStoreSinglePerformanceReport(performance);
     }
 
-    // Endpoint to get all historical reports for a player
-    @GetMapping("/getallreports/{playerId}")
-    public List<PlayerPerformanceReport> getAllReportsForPlayer(@PathVariable int playerId) {
-        return performanceService.getAllReportsByPlayerId(playerId);
-    }
+    // Endpoint to get team performance reports
     @GetMapping("/team/{teamId}/reports")
     public List<PlayerPerformanceReport> getTeamPerformanceReports(@PathVariable int teamId) {
         return performanceService.getTeamPerformanceReports(teamId);

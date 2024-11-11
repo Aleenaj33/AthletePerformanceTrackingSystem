@@ -21,7 +21,6 @@ public class TrainingSession {
     private int sessionId;
     private int coachId;
     private List<Integer> playerIds; 
-    //private int playerId;
     private String date;
     private String duration;
    

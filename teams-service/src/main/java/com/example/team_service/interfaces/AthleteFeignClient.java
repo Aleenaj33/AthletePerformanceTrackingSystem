@@ -25,4 +25,6 @@ public interface AthleteFeignClient {
     @PutMapping("/update-teams/{coachId}")
     void updateCoachTeamIds(@PathVariable("coachId") int coachId, @RequestBody List<Integer> teamIds);
     
+    @GetMapping("/players/unassigned")
+    List<Player> getUnassignedPlayers();
 }

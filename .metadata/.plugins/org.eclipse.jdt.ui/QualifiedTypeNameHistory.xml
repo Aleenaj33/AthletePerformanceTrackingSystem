@@ -13,6 +13,18 @@
     <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.model.Player"/>
     <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.model.Coach"/>
     <fullyQualifiedTypeName name="org.springframework.data.annotation.Id"/>
+<<<<<<< HEAD
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="org.springframework.cloud.openfeign.EnableFeignClients"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.springframework.cloud.openfeign.FeignClient"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+=======
     <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.model.TrainingSession"/>
     <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.interfaces.TrainingSessionFeignClient"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.openfeign.EnableFeignClients"/>
@@ -26,4 +38,5 @@
     <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.model.PlayerGoal"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.netflix.eureka.server.EnableEurekaServer"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.client.discovery.EnableDiscoveryClient"/>
+>>>>>>> cbc1883f66bed799f28e43e1b67f55b4c8005f45
 </qualifiedTypeNameHistroy>

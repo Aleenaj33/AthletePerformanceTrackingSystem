@@ -1,12 +1,20 @@
 package com.example.team_service.controller;
 
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.team_service.interfaces.AthleteFeignClient;
+
 import com.example.team_service.model.Player;
 import com.example.team_service.model.Team;
 import com.example.team_service.service.TeamService;
 
-
-
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,13 +51,7 @@ public class TeamController {
     public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
-    @GetMapping("/getdemo")
-    public String getAll() {
-    	
-       
-        return "welcome";
-       
-    }
+   
 
     // Create a new team
     @PostMapping
@@ -109,5 +111,15 @@ public class TeamController {
         List<Team> teams = teamService.findTeamsBySportCategory(sportCategory);
         return new ResponseEntity<>(teams, HttpStatus.OK);
     }
+    
+    @Autowired
+    private AthleteFeignClient athleteFeignClient;
+    @GetMapping("/teams/unassigned-players")
+    public ResponseEntity<List<Player>> getUnassignedPlayersForTeamCreation() {
+        List<Player> unassignedPlayers = athleteFeignClient.getUnassignedPlayers();
+        return ResponseEntity.ok(unassignedPlayers);
+    }
+    
+    
 }
 

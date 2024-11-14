@@ -44,6 +44,8 @@ public class PerformanceService {
     public PlayerPerformanceReport generateReport(List<PlayerPerformance> playerPerformances) {
         return PlayerPerformanceReport.generateReport(playerPerformances);
     }
+    
+    
 
     // Fetch player performance by playerId
     public List<PlayerPerformance> getPlayerPerformanceByPlayerId(int playerId) {

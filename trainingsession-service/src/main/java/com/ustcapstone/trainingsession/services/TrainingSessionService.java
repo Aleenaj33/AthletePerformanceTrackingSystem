@@ -14,7 +14,14 @@ public class TrainingSessionService {
 
     @Autowired
     private TrainingSessionRepository trainingSessionRepository;
+    
+    private int sessionId = 1; // Initial session ID, could be persisted in DB for production
 
+    // Method to get the current sessionId and increment it
+    public synchronized int getNextSessionId() {
+        return sessionId++; // Atomically return and increment sessionId
+    }
+    
     public TrainingSession createTrainingSession(TrainingSession session) {
         return trainingSessionRepository.save(session);
     }

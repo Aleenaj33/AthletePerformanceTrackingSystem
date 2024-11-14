@@ -30,7 +30,8 @@ public class AthleteService {
     
     @Autowired  // Injects TrainingSessionFeignClient into AthleteService
     private TrainingSessionFeignClient trainingSessionFeignClient;
-
+    
+    
    
     public AthleteService(TeamFeignClient teamFeignClient) {
         this.teamFeignClient = teamFeignClient;
@@ -40,6 +41,9 @@ public class AthleteService {
         Coach coach = coachRepository.findById(coachId)
                 .orElseThrow(() -> new RuntimeException("Coach not found for ID: " + coachId));
         return coach.getTeamIds(); // Return the list of team IDs
+    }
+    public Team createTeam(Team team) {
+    	return teamFeignClient.createTeam(team);
     }
     public void updateTeamIds(int coachId, List<Integer> teamIds) {
         Coach coach = coachRepository.findById(coachId)

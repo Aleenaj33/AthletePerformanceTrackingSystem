@@ -3,6 +3,8 @@ package com.ustcapstone.atheleteservice.interfaces;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ustcapstone.atheleteservice.model.Player;
 import com.ustcapstone.atheleteservice.model.Team;
@@ -19,6 +21,8 @@ public interface TeamFeignClient{
     Team getTeamByPlayerId(@PathVariable int playerId);
     @GetMapping("/{teamId}")
     Team getTeamById(@PathVariable int teamId);
+    @PostMapping
+    Team createTeam(@RequestBody Team team);
  
     
     

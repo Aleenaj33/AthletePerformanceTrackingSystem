@@ -19,6 +19,5 @@ public interface AthleteRepository extends MongoRepository<Player, Integer> {
 	//added by me
 	List<Player> findByTeamId(int teamId);
 
-	//me
 }
 

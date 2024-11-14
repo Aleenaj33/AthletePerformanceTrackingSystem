@@ -32,39 +32,4 @@
 		<item value="org.jboss.tools.m2e.wro4j.feature:1.2.1.202301111328"/>
 		<item value="org.sonatype.m2e.egit.feature:0.17.0.202209271423"/>
 	</list>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> cbc1883f66bed799f28e43e1b67f55b4c8005f45
-	<section name="SmartImportWizard">
-		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
-		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
-		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
-		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
-		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
-<<<<<<< HEAD
-			<item value="D:\UST-CapstoneProject\trainingsession-service"/>
-			<item value="D:\UST-CapstoneProject\performance-analysis"/>
-			<item value="D:\UST-CapstoneProject\coach-player-service"/>
-			<item value="D:\UST-CapstoneProject\goal-service"/>
-=======
-			<item value="D:\USTCAPSTONEPROJECT\projectcode\performance-analysis"/>
->>>>>>> cbc1883f66bed799f28e43e1b67f55b4c8005f45
-		</list>
-		<section name="SmartImportWizard.dialogBounds">
-			<item key="DIALOG_X_ORIGIN" value="206"/>
-			<item key="DIALOG_Y_ORIGIN" value="8"/>
-			<item key="DIALOG_WIDTH" value="885"/>
-			<item key="DIALOG_HEIGHT" value="629"/>
-			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
-		</section>
-	</section>
-<<<<<<< HEAD
-=======
-=======
->>>>>>> ecbe57c16e4c2bc1bb20b939069fc2eaf97cbc6d
->>>>>>> cbc1883f66bed799f28e43e1b67f55b4c8005f45
->>>>>>> 84e4a7833a3754c12bdb01ede5e8926dd03a7458
 </section>

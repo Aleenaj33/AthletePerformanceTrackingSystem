@@ -21,7 +21,11 @@ public class Player {
 	    @Id
 	    private int playerId;
 	    private String name;
+	    private String email;
 	    private String sport;
 	    private int teamId; // Reference to Team in TeamService
+	    private int age;
+	    private int height;
+	    private int weight;
 
 }

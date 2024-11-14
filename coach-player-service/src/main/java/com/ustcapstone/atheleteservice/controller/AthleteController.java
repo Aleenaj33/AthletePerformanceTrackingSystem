@@ -145,6 +145,8 @@ public class AthleteController {
         List<TrainingSession> sessions = athleteService.getTrainingSessionsByCoachId(coachId);
         return ResponseEntity.ok(sessions);
     }
+    
+
     //*******************************************************************
     
     @Autowired

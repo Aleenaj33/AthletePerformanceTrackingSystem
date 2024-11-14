@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlayerPerformanceReport {
-
+     
+	
     private int playerId;
     private String playerName;
     private String reportDate;

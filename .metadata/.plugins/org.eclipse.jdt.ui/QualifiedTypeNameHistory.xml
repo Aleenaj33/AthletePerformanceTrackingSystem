@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.ustcapstone.goalservice.exception.GoalNotFoundException.GoalCreationException"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.goalservice.exception.GoalNotFoundException"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.goalservice.exception.GoalCreationException"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.performance_analysis.exception.PlayerPerformanceNotFoundException"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.performance_analysis.exception.ReportNotFoundException"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="com.example.team_service.exception.TeamCreationException"/>
+    <fullyQualifiedTypeName name="com.example.team_service.exception.TeamDeletionException"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.trainingsession.exception.TrainingSessionDeletionException"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.trainingsession.exception.TrainingSessionCreationException"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.exception.PlayerCreationException"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.atheleteservice.exception.CoachCreationException"/>
+</qualifiedTypeNameHistroy>

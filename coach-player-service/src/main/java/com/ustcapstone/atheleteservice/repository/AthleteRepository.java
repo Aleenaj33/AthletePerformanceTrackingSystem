@@ -12,12 +12,14 @@ import org.springframework.stereotype.Repository;
 import com.ustcapstone.atheleteservice.model.Player;
 
 @Repository
-public interface AthleteRepository extends MongoRepository<Player, Integer> {
+public interface AthleteRepository extends MongoRepository<Player,Integer> {
     // Custom query methods can be defined here if needed
 	
 	
 	//added by me
 	List<Player> findByTeamId(int teamId);
+
 	List<Player> findAllByPlayerIdIn(List<Integer> playerIds);
+
 }
 

@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ustcapstone.performance_analysis.exception.PlayerPerformanceNotFoundException;
+import com.ustcapstone.performance_analysis.exception.ReportNotFoundException;
 import com.ustcapstone.performance_analysis.interfaces.TeamFeignClient;
 import com.ustcapstone.performance_analysis.model.PlayerPerformance;
 import com.ustcapstone.performance_analysis.model.PlayerPerformanceReport;
@@ -44,15 +46,23 @@ public class PerformanceService {
     public PlayerPerformanceReport generateReport(List<PlayerPerformance> playerPerformances) {
         return PlayerPerformanceReport.generateReport(playerPerformances);
     }
-
-    // Fetch player performance by playerId
+    
     public List<PlayerPerformance> getPlayerPerformanceByPlayerId(int playerId) {
-        return performanceRepository.findByPlayerId(playerId);
+        List<PlayerPerformance> playerPerformances = performanceRepository.findByPlayerId(playerId);
+        if (playerPerformances.isEmpty()) {
+            throw new PlayerPerformanceNotFoundException("Player performance data not found for player ID: " + playerId);
+        }
+        return playerPerformances;
     }
+
+
     public List<PlayerPerformance> getAllMetricsByPlayerId(int playerId) {
         return performanceRepository.findByPlayerId(playerId);
+        
     }
+    
     public PlayerPerformanceReport generateAndStoreSinglePerformanceReport(PlayerPerformance performance) {
+    	
         PlayerPerformanceReport report = new PlayerPerformanceReport();
         report.setPlayerId(performance.getPlayerId());
         report.setPlayerName(performance.getPlayerName());

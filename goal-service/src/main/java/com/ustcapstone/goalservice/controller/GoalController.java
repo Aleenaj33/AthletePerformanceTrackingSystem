@@ -1,5 +1,8 @@
 package com.ustcapstone.goalservice.controller;
 
+
+import com.ustcapstone.goalservice.exception.GoalCreationException;
+import com.ustcapstone.goalservice.exception.GoalNotFoundException;
 import com.ustcapstone.goalservice.model.PlayerGoal;
 import com.ustcapstone.goalservice.service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +15,21 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/goals")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class GoalController {
 
     @Autowired
     private GoalService goalService;
     
     @PostMapping("/creategoal/")
-    public ResponseEntity<PlayerGoal> createGoal(@RequestBody PlayerGoal newGoal) {
+    public ResponseEntity<PlayerGoal> createGoal(@RequestBody PlayerGoal newGoal) throws GoalCreationException {
         PlayerGoal createdGoal = goalService.createGoal(newGoal);
         return ResponseEntity.ok(createdGoal);
     }
 
     // Update an existing goal
     @PutMapping("/{goalId}")
-    public ResponseEntity<PlayerGoal> updateGoal(@PathVariable int goalId, @RequestBody PlayerGoal updatedGoal) {
+    public ResponseEntity<PlayerGoal> updateGoal(@PathVariable int goalId, @RequestBody PlayerGoal updatedGoal) throws GoalNotFoundException {
         try {
             PlayerGoal updatedPlayerGoal = goalService.updateGoal(goalId, updatedGoal);
             return ResponseEntity.ok(updatedPlayerGoal);

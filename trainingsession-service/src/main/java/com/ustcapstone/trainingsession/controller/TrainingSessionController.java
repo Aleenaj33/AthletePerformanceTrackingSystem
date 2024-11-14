@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/training-sessions")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class TrainingSessionController {
 
     @Autowired
@@ -20,7 +21,9 @@ public class TrainingSessionController {
     // Create Training Session
     @PostMapping
     public ResponseEntity<TrainingSession> createTrainingSession(@RequestBody TrainingSession session) {
-        return ResponseEntity.ok(trainingSessionService.createTrainingSession(session));
+    	int newSessionId = trainingSessionService.getNextSessionId();
+        session.setSessionId(newSessionId);
+    	return ResponseEntity.ok(trainingSessionService.createTrainingSession(session));
     }
 
     // Update Training Session

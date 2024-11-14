@@ -23,7 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/athletes")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class AthleteController {
 	
 
@@ -55,6 +55,10 @@ public class AthleteController {
     @GetMapping("/team/{teamId}")
     public List<Player> getPlayersByTeamId(@PathVariable int teamId) {
         return athleteService.getPlayersByTeamId(teamId);
+    }
+    @PostMapping("/createTeams")
+    public Team createTeam(@RequestBody Team team ) {
+    	return athleteService.createTeam(team);
     }
    
     
@@ -130,8 +134,8 @@ public class AthleteController {
     }
     
     //*********************************************************************************************
-	//@Autowired
-    //private TrainingSessionFeignClient trainingSessionFeignClient;
+	@Autowired
+    private TrainingSessionFeignClient trainingSessionFeignClient;
 	
 	
 	@GetMapping("/training-sessions/player/{playerId}")
@@ -145,12 +149,22 @@ public class AthleteController {
         List<TrainingSession> sessions = athleteService.getTrainingSessionsByCoachId(coachId);
         return ResponseEntity.ok(sessions);
     }
-    
+
+    @PostMapping("/createTrainingSession")
+    public ResponseEntity<TrainingSession> createTrainingSession(@RequestBody TrainingSession session) {
+        return ResponseEntity.ok(trainingSessionFeignClient.createTrainingSession(session));
+    }
 
     //*******************************************************************
     
     @Autowired
     private GoalServiceFeignClient goalServiceClient;
+    
+    @PostMapping("/creategoal")
+    public ResponseEntity<PlayerGoal> createGoal(@RequestBody PlayerGoal newGoal) {
+        PlayerGoal createdGoal = goalServiceClient.createGoal(newGoal);
+        return ResponseEntity.ok(createdGoal);
+    }
 
     // Endpoint to get all goals for a player
     @GetMapping("/player/{playerId}/goals")

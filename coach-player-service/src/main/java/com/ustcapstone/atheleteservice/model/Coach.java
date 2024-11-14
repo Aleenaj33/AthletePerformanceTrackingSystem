@@ -15,13 +15,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Coach {
-    @Id
-    private int coachId;
+ @Id
+    private int coachId;  
     private String name;
     private String sport;
+    private List<Integer> teamIds;  
     private int age;
-    private int email;
-  
-    private List<Integer> teamIds; // List of team IDs
+    private String email;
+
+    // Getters and setters
 }

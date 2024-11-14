@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor 
 public class Player {
-	    @Id
+	   @Id
 	    private int playerId;
 	    private String name;
 	    private String email;

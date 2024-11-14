@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.ustcapstone.atheleteservice.exception.CoachCreationException;
+import com.ustcapstone.atheleteservice.exception.PlayerCreationException;
 import com.ustcapstone.atheleteservice.interfaces.TeamFeignClient;
 import com.ustcapstone.atheleteservice.interfaces.TrainingSessionFeignClient;
 import com.ustcapstone.atheleteservice.model.Coach;
@@ -38,7 +40,8 @@ public class AthleteService {
     
     @Autowired  // Injects TrainingSessionFeignClient into AthleteService
     private TrainingSessionFeignClient trainingSessionFeignClient;
-
+    
+    
    
     public AthleteService(TeamFeignClient teamFeignClient) {
         this.teamFeignClient = teamFeignClient;
@@ -48,6 +51,9 @@ public class AthleteService {
         Coach coach = coachRepository.findById(coachId)
                 .orElseThrow(() -> new RuntimeException("Coach not found for ID: " + coachId));
         return coach.getTeamIds(); // Return the list of team IDs
+    }
+    public Team createTeam(Team team) {
+    	return teamFeignClient.createTeam(team);
     }
     public void updateTeamIds(int coachId, List<Integer> teamIds) {
         Coach coach = coachRepository.findById(coachId)
@@ -88,8 +94,25 @@ public class AthleteService {
     }
 
     // Player CRUD Operations
+//    public Player createPlayer(Player player) {
+//    	long playerCount = athleteRepository.count(); 
+//        int nextPlayerId = (int) (playerCount + 1);  
+//        player.setPlayerId(nextPlayerId);
+//        return athleteRepository.save(player);
+//    }
     public Player createPlayer(Player player) {
-        return athleteRepository.save(player);
+        try {
+          
+            long playerCount = athleteRepository.count();
+            int nextPlayerId = (int) (playerCount + 1);
+            player.setPlayerId(nextPlayerId);
+            
+            // Saving the player to the database
+            return athleteRepository.save(player);
+        } catch (Exception e) {
+            // If there is any issue, throw a custom exception
+            throw new PlayerCreationException("Error creating player: " + e.getMessage());
+        }
     }
 
     public List<Player> getAllPlayers() {
@@ -109,8 +132,25 @@ public class AthleteService {
     }
 
     // Coach CRUD Operations
+//    public Coach createCoach(Coach coach) {
+//    	long coachCount = coachRepository.count(); 
+//        int nextCoachId = (int) (coachCount + 1);  
+//        coach.setCoachId(nextCoachId);
+//        return coachRepository.save(coach);
+//    }
     public Coach createCoach(Coach coach) {
-        return coachRepository.save(coach);
+        try {
+            // Simulating logic to calculate next coach ID
+            long coachCount = coachRepository.count();
+            int nextCoachId = (int) (coachCount + 1);
+            coach.setCoachId(nextCoachId);
+            
+            // Saving the coach to the database
+            return coachRepository.save(coach);
+        } catch (Exception e) {
+            // If there is any issue, throw a custom exception
+            throw new CoachCreationException("Error creating coach: " + e.getMessage());
+        }
     }
 
     public List<Coach> getAllCoaches() {

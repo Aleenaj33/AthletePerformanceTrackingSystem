@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.team_service.exception.TeamCreationException;
+import com.example.team_service.exception.TeamDeletionException;
 import com.example.team_service.interfaces.AthleteFeignClient;
 
 import com.example.team_service.model.Player;
@@ -73,12 +75,19 @@ public class TeamService {
     }
 
     // Create a new team
+  
+  
+    
     @Transactional
     public Team createTeam(Team team) {
-        Team createdTeam = teamRepository.save(team);
-        updateCoachTeams(team.getCoachId(), createdTeam.getTeamId(), true);
-        updatePlayersTeamId(createdTeam.getTeamId(), team.getPlayerIds());
-        return createdTeam;
+        try {
+            Team createdTeam = teamRepository.save(team);
+            updateCoachTeams(team.getCoachId(), createdTeam.getTeamId(), true);
+            updatePlayersTeamId(createdTeam.getTeamId(), team.getPlayerIds());
+            return createdTeam;
+        } catch (Exception e) {
+            throw new TeamCreationException("Failed to create team: " + team.getName());
+        }
     }
 
     // Update an existing team
@@ -106,19 +115,19 @@ public class TeamService {
     }
 
     // Delete a team
+    
     @Transactional
     public void deleteTeam(int teamId) {
         Team team = teamRepository.findById(teamId)
-            .orElseThrow(() -> new RuntimeException("Team not found for ID: " + teamId));
+                .orElseThrow(() -> new RuntimeException("Team not found for ID: " + teamId));
 
-        // Remove teamId from players
-        athleteFeignClient.removePlayersTeamId(teamId);
-
-        // Update coach's team IDs to remove the deleted team
-        updateCoachTeams(team.getCoachId(), teamId, false);
-
-        // Delete the team from the repository
-        teamRepository.delete(team);
+        try {
+            athleteFeignClient.removePlayersTeamId(teamId);
+            updateCoachTeams(team.getCoachId(), teamId, false);
+            teamRepository.delete(team);
+        } catch (Exception e) {
+            throw new TeamDeletionException("Failed to delete team with ID: " + teamId);
+        }
     }
 
     // Helper method to update players' teamId

@@ -149,10 +149,12 @@ public class AthleteController {
         List<TrainingSession> sessions = athleteService.getTrainingSessionsByCoachId(coachId);
         return ResponseEntity.ok(sessions);
     }
+
     @PostMapping("/createTrainingSession")
     public ResponseEntity<TrainingSession> createTrainingSession(@RequestBody TrainingSession session) {
         return ResponseEntity.ok(trainingSessionFeignClient.createTrainingSession(session));
     }
+
     //*******************************************************************
     
     @Autowired

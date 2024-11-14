@@ -20,6 +20,8 @@ public class Coach {
     private int coachId;
     private String name;
     private String sport;
+    private int age;
+    private int email;
   
     private List<Integer> teamIds; // List of team IDs
 }

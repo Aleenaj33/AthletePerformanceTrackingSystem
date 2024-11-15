@@ -210,4 +210,8 @@ public class AthleteService {
         return coachRepository.findById(coachId)
                 .orElseThrow(() -> new RuntimeException("Coach not found"));
     }
+    public String getPlayerNameById(int playerId) {
+        Optional<Player> player = athleteRepository.findById(playerId);
+        return player.map(Player::getName).orElse(null);
+    }
 }

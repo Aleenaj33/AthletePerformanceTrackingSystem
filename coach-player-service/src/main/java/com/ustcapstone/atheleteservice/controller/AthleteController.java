@@ -242,6 +242,16 @@ public class AthleteController {
         return ResponseEntity.ok(coach);
     }
     
+    @GetMapping("/{playerId}/name")
+    public ResponseEntity<String> getPlayerNameById(@PathVariable int playerId) {
+        String playerName = athleteService.getPlayerNameById(playerId);
+        if (playerName != null) {
+            return ResponseEntity.ok(playerName);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
     
     
     

@@ -21,8 +21,7 @@ public class TrainingSessionController {
     // Create Training Session
     @PostMapping
     public ResponseEntity<TrainingSession> createTrainingSession(@RequestBody TrainingSession session) {
-    	int newSessionId = trainingSessionService.getNextSessionId();
-        session.setSessionId(newSessionId);
+    	
     	return ResponseEntity.ok(trainingSessionService.createTrainingSession(session));
     }
 

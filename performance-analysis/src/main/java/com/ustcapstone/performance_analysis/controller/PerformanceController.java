@@ -37,6 +37,7 @@ public class PerformanceController {
     // Endpoint to add metrics and generate report for a single performance
     @PostMapping("/add")
     public PlayerPerformanceReport addPerformanceAndGenerateReport(@RequestBody PlayerPerformance performance) {
+    	performanceService.submitPlayerPerformance(performance);
         return performanceService.generateAndStoreSinglePerformanceReport(performance);
     }
 

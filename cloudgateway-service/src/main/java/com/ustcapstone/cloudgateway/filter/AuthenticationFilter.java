@@ -10,11 +10,6 @@ import com.ustcapstone.cloudgateway.util.JWTUtil;
 
 
 
-
-
-
-
-
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 

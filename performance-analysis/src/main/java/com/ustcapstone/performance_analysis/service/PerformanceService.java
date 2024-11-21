@@ -35,6 +35,9 @@ public class PerformanceService {
 
     // Submit performance metrics for a player
     public PlayerPerformance submitPlayerPerformance(PlayerPerformance playerPerformance) {
+    	long metric = performanceRepository.count(); 
+        int metricsId = (int) (metric + 1);  
+        playerPerformance.setId(metricsId);
         playerPerformance.setRecordDateTime(LocalDateTime.now().toString());
         // Save the player's performance data
         return performanceRepository.save(playerPerformance);

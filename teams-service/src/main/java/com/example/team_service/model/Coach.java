@@ -21,7 +21,7 @@ public class Coach {
     private String name;
     private String sport;
     private int age;
-    private int email;
+    private String email;
   
     private List<Integer> teamIds; // List of team IDs
 }

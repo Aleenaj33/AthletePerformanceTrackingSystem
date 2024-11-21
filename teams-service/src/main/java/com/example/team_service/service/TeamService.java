@@ -75,6 +75,9 @@ public class TeamService {
     // Create a new team
     @Transactional
     public Team createTeam(Team team) {
+    	long playerCount = teamRepository.count(); 
+        int nextPlayerId = (int) (playerCount + 1);  
+        team.setTeamId(nextPlayerId);
         Team createdTeam = teamRepository.save(team);
         updateCoachTeams(team.getCoachId(), createdTeam.getTeamId(), true);
         updatePlayersTeamId(createdTeam.getTeamId(), team.getPlayerIds());

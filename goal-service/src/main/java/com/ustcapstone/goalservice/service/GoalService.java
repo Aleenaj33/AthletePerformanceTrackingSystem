@@ -21,6 +21,9 @@ public class GoalService {
 	 
 	 
 	 public PlayerGoal createGoal(PlayerGoal goal) {
+		 long goalCount = goalRepository.count(); 
+	        int nextGoalId = (int) (goalCount + 1);  
+	        goal.setGoalId(nextGoalId);
 	        return goalRepository.save(goal);
 	    }
 

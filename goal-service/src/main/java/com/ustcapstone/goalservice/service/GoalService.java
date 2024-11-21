@@ -1,5 +1,6 @@
 package com.ustcapstone.goalservice.service;
 
+import com.ustcapstone.goalservice.exception.GoalCreationException;
 import com.ustcapstone.goalservice.model.PlayerGoal;
 import com.ustcapstone.goalservice.repository.GoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,12 @@ public class GoalService {
 
 	 
 	 
-	 public PlayerGoal createGoal(PlayerGoal goal) {
-		 long goalCount = goalRepository.count(); 
-	        int nextGoalId = (int) (goalCount + 1);  
-	        goal.setGoalId(nextGoalId);
+
+	 public PlayerGoal createGoal(PlayerGoal goal) throws GoalCreationException {
+	        if (goal == null || goal.getPlayerId() == 0) {
+	            throw new GoalCreationException("Invalid goal data.");
+	        }
+
 	        return goalRepository.save(goal);
 	    }
 

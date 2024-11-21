@@ -1,5 +1,6 @@
 package com.ustcapstone.performance_analysis.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,26 +26,48 @@ public class PerformanceController {
 
     @GetMapping("/player/{playerId}/metrics")
     public List<PlayerPerformance> getAllMetricsByPlayerId(@PathVariable int playerId) {
-        return performanceService.getAllMetricsByPlayerId(playerId);
+        try {
+            return performanceService.getAllMetricsByPlayerId(playerId);
+        } catch (Exception ex) {
+            System.out.println("Error fetching metrics for player ID " + playerId + ": " + ex.getMessage());
+            return Collections.emptyList(); // Return an empty list if an error occurs
+        }
     }
 
     // Endpoint to get all historical reports for a player
     @GetMapping("/player/{playerId}/reports")
     public List<PlayerPerformanceReport> getAllReportsForPlayer(@PathVariable int playerId) {
-        return performanceService.getAllReportsByPlayerId(playerId);
+        try {
+            return performanceService.getAllReportsByPlayerId(playerId);
+        } catch (Exception ex) {
+            System.out.println("Error fetching reports for player ID " + playerId + ": " + ex.getMessage());
+            return Collections.emptyList(); // Return an empty list if an error occurs
+        }
     }
 
     // Endpoint to add metrics and generate report for a single performance
     @PostMapping("/add")
     public PlayerPerformanceReport addPerformanceAndGenerateReport(@RequestBody PlayerPerformance performance) {
-    	performanceService.submitPlayerPerformance(performance);
-        return performanceService.generateAndStoreSinglePerformanceReport(performance);
+
+        try {
+            return performanceService.generateAndStoreSinglePerformanceReport(performance);
+        } catch (Exception ex) {
+           System.out.println("Error generating report for performance: " + ex.getMessage());
+            return null; // Return null if an error occurs
+       }
+
     }
 
     // Endpoint to get team performance reports
     @GetMapping("/team/{teamId}/reports")
     public List<PlayerPerformanceReport> getTeamPerformanceReports(@PathVariable int teamId) {
-        return performanceService.getTeamPerformanceReports(teamId);
+        try {
+            return performanceService.getTeamPerformanceReports(teamId);
+        } catch (Exception ex) {
+            System.out.println("Error fetching reports for team ID " + teamId + ": " + ex.getMessage());
+            return Collections.emptyList(); // Return an empty list if an error occurs
+        }
     }
+
     
 }

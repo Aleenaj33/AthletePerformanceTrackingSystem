@@ -16,6 +16,8 @@ import com.ustcapstone.atheleteservice.model.PlayerPerformance;
 import com.ustcapstone.atheleteservice.model.PlayerPerformanceReport;
 import com.ustcapstone.atheleteservice.model.Team;
 import com.ustcapstone.atheleteservice.model.TrainingSession;
+import com.ustcapstone.atheleteservice.repository.AthleteRepository;
+import com.ustcapstone.atheleteservice.repository.CoachRepository;
 import com.ustcapstone.atheleteservice.service.AthleteService;
 
 
@@ -30,6 +32,31 @@ public class AthleteController {
 
     @Autowired
     private AthleteService athleteService;
+    
+    @Autowired
+    private CoachRepository coachRepository;
+    
+    @Autowired
+    private AthleteRepository athleteRepository;
+    
+    
+    
+    @GetMapping("/playerid-by-email")
+    public ResponseEntity<Integer> getPlayerIdByEmail(@RequestParam String email) {
+        return athleteRepository.findByEmail(email)
+                .map(player -> ResponseEntity.ok(player.getPlayerId()))
+                .orElse(ResponseEntity.notFound().build());
+    }
+    
+    
+    @GetMapping("/coachid-by-email")
+    public ResponseEntity<Integer> getCoachIdByEmail(@RequestParam String email) {
+        return coachRepository.findByEmail(email)
+                .map(coach -> ResponseEntity.ok(coach.getCoachId()))
+                .orElse(ResponseEntity.notFound().build());
+    }
+    
+    
     
     
     //********************************************************************************

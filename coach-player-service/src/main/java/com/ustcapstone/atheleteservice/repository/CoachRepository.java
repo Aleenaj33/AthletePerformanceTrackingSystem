@@ -9,5 +9,6 @@ import com.ustcapstone.atheleteservice.model.Coach;
 
 public interface CoachRepository extends MongoRepository<Coach, Integer> {
 	 
-   
+	
+	Optional<Coach> findByEmail(String email);
 }

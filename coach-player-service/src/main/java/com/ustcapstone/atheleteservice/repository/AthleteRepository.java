@@ -20,6 +20,8 @@ public interface AthleteRepository extends MongoRepository<Player,Integer> {
 	List<Player> findByTeamId(int teamId);
 
 	List<Player> findAllByPlayerIdIn(List<Integer> playerIds);
+	
+	Optional<Player> findByEmail(String email);
 
 }
 

@@ -41,6 +41,10 @@ public class AthleteService {
     @Autowired  // Injects TrainingSessionFeignClient into AthleteService
     private TrainingSessionFeignClient trainingSessionFeignClient;
     
+ 
+ 
+
+    
     
    
     public AthleteService(TeamFeignClient teamFeignClient) {

@@ -26,6 +26,9 @@ public class GoalService {
 	        if (goal == null || goal.getPlayerId() == 0) {
 	            throw new GoalCreationException("Invalid goal data.");
 	        }
+	        long goalCount = goalRepository.count(); 
+	        int nextPlayerId = (int) (goalCount + 1);  
+	        goal.setGoalId(nextPlayerId);
 
 	        return goalRepository.save(goal);
 	    }

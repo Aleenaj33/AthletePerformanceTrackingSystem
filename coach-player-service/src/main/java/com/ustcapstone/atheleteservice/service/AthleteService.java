@@ -4,8 +4,11 @@ package com.ustcapstone.atheleteservice.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ustcapstone.atheleteservice.exception.CoachCreationException;
 import com.ustcapstone.atheleteservice.exception.PlayerCreationException;
@@ -91,7 +94,17 @@ public class AthleteService {
                 athleteRepository.save(player); // Save updated player
             }
         }
-        
+ 
+        public void removePlayersTeamId(int teamId, List<Integer> playerIds) {
+        	List<Player> players = athleteRepository.findAllByPlayerIdIn(playerIds);
+
+            for (Player player : players) {
+                player.setTeamId(0); // Update teamId for each player
+                athleteRepository.save(player); // Save updated player
+            }
+        }
+   
+       
 
     public List<Team> getTeamsByCoachId(int coachId) {
         return teamFeignClient.getTeamsByCoachId(coachId);
@@ -173,18 +186,33 @@ public class AthleteService {
         coachRepository.deleteById(id);
     }
     
-   public List<TrainingSession> getTrainingSessionsByPlayerId(int playerId) {
-	   return trainingSessionFeignClient.getSessionsByPlayerId(playerId);
-   }
-   public List<String> getPlayerNamesByIds(List<Integer> playerIds) {
-       // Fetch players by playerId (adjusted to use 'playerId')
-       List<Player> players = athleteRepository.findAllByPlayerIdIn(playerIds);
-       
-       // Return a list of player names
-       return players.stream()
-               .map(Player::getName)  // Assuming 'getName()' method is present in your Player entity
-               .collect(Collectors.toList());
-   }
+//   public List<TrainingSession> getTrainingSessionsByPlayerId(int playerId) {
+//	   return trainingSessionFeignClient.getSessionsByPlayerId(playerId);
+//   }
+    
+    public List<TrainingSession> getTrainingSessionsByPlayerId(int playerId) {
+        // Fetch training sessions using Feign client
+        List<TrainingSession> sessions = trainingSessionFeignClient.getSessionsByPlayerId(playerId);
+
+        // Populate playernames for each session
+        for (TrainingSession session : sessions) {
+            if (session.getPlayerIds() != null) {
+                // Fetch names for each playerId
+                List<String> names = session.getPlayerIds().stream()
+                    .map(athleteRepository::findById)
+                    .filter(Optional::isPresent)
+                    .map(player -> player.get().getName()) // Assuming the Player entity has a `getName()` method
+                    .collect(Collectors.toList());
+
+                // Set the playernames in the session
+                session.setPlayernames(names);
+            }
+        }
+
+        return sessions;
+    }
+
+   
     public List<TrainingSession> getTrainingSessionsByCoachId(int coachId) {
         return trainingSessionFeignClient.getSessionsByCoachId(coachId);
     }

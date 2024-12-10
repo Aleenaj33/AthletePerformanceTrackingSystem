@@ -117,19 +117,50 @@ public class TeamService {
 
     // Delete a team
     
+//    @Transactional
+//    public void deleteTeam(int teamId) {
+//        Team team = teamRepository.findById(teamId)
+//                .orElseThrow(() -> new RuntimeException("Team not found for ID: " + teamId));
+//
+//        try {
+//            athleteFeignClient.removePlayersTeamId(teamId);
+//            updateCoachTeams(team.getCoachId(), teamId, false);
+//            teamRepository.delete(team);
+//        } catch (Exception e) {
+//            throw new TeamDeletionException("Failed to delete team with ID: " + teamId);
+//        }
+//    }
+    
+    
+    
+    
     @Transactional
-    public void deleteTeam(int teamId) {
+    public void deleteTeam(int teamId,List<Integer> playerIds) {
         Team team = teamRepository.findById(teamId)
                 .orElseThrow(() -> new RuntimeException("Team not found for ID: " + teamId));
 
         try {
-            athleteFeignClient.removePlayersTeamId(teamId);
+            // Remove players' team IDs
+            athleteFeignClient.removePlayersTeamId(teamId,playerIds);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to update player team IDs: " + e.getMessage());
+        }
+
+        try {
+            // Update the coach's team list
             updateCoachTeams(team.getCoachId(), teamId, false);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to update coach teams: " + e.getMessage());
+        }
+
+        try {
+            // Delete the team
             teamRepository.delete(team);
         } catch (Exception e) {
-            throw new TeamDeletionException("Failed to delete team with ID: " + teamId);
+            throw new RuntimeException("Failed to delete team: " + e.getMessage());
         }
     }
+
 
     // Helper method to update players' teamId
     private void updatePlayersTeamId(int teamId, List<Integer> playerIds) {

@@ -17,15 +17,7 @@ public class TrainingSessionService {
     @Autowired
     private TrainingSessionRepository trainingSessionRepository;
     
-    // Initial session ID, could be persisted in DB for production
-
-    // Method to get the current sessionId and increment it
-  
-    
-//    public TrainingSession createTrainingSession(TrainingSession session) {
-//        return trainingSessionRepository.save(session);
-//    }
-//    
+ 
     public TrainingSession createTrainingSession(TrainingSession session) {
 
     	long sessionCount = trainingSessionRepository.count(); 

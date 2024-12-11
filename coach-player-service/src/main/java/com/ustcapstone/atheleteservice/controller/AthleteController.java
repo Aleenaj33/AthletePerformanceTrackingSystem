@@ -79,6 +79,25 @@ public class AthleteController {
     public void updatePlayersTeamId(@PathVariable int teamId, @RequestBody List<Integer> playerIds) {
         athleteService.updatePlayersTeamId(teamId, playerIds);
     }
+    
+    
+//    @PutMapping("/remove-team/{teamId}")
+//    public void removePlayersTeamId(@PathVariable("teamId") int teamId,List<Integer> playerIds) {
+//    athleteService.removePlayersTeamId(teamId, playerIds);
+//    }
+    @PutMapping("/remove-team/{teamId}")
+    public ResponseEntity<Void> removePlayersTeamId(
+            @PathVariable int teamId,
+            @RequestParam List<Integer> playerIds) {
+        try {
+            athleteService.removePlayersTeamId(teamId, playerIds);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+   
     @GetMapping("/team/{teamId}")
     public List<Player> getPlayersByTeamId(@PathVariable int teamId) {
         return athleteService.getPlayersByTeamId(teamId);
@@ -278,6 +297,7 @@ public class AthleteController {
             return ResponseEntity.notFound().build();
         }
     }
+    
     
     
     

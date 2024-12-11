@@ -79,6 +79,11 @@ public class PerformanceService {
         report.addMetricPerformance("Calories Burned", performance.getCaloriesBurned(), PlayerPerformance.CALORIES_STANDARD);
 
         // Save the report in the repository for record-keeping
+        long metric = performanceRepository.count(); 
+        int metricsId = (int) (metric + 1);  
+        performance.setId(metricsId);
+        performance.setRecordDateTime(LocalDateTime.now().toString());
+        performanceRepository.save(performance);
         reportRepository.save(report);
         return report;
     }

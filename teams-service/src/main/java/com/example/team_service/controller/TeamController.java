@@ -70,7 +70,8 @@ public class TeamController {
     // Delete a team
     @DeleteMapping("/{teamId}")
     public ResponseEntity<Void> deleteTeam(@PathVariable int teamId) {
-        teamService.deleteTeam(teamId);
+    	List<Integer> playerIds = teamService.getPlayerIdsByTeamId(teamId);
+        teamService.deleteTeam(teamId,playerIds);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

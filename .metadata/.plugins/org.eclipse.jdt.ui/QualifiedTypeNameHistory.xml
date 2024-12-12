@@ -4,4 +4,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="com.ustcapstone.performance.model.PerformanceReport"/>
+    <fullyQualifiedTypeName name="com.ustcapstone.performance.model.PerformanceReportWithRemarks"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
 </qualifiedTypeNameHistroy>

@@ -11,7 +11,7 @@ import com.ustcapstone.performance.service.PerformanceReportService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/performance-reports")
+@RequestMapping("/performance-reports")
 public class PerformanceReportController {
 
     @Autowired

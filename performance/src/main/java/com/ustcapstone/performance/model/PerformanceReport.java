@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PerformanceReport {
 
     @Id
-    private String id;
+    private String id; // MongoDB will automatically generate this ID
 
     private int playerId;
     private int age;

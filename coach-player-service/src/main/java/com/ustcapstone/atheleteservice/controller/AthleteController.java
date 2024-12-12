@@ -6,14 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ustcapstone.atheleteservice.interfaces.GoalServiceFeignClient;
-import com.ustcapstone.atheleteservice.interfaces.PerformanceFeignClient;
+
 import com.ustcapstone.atheleteservice.interfaces.TeamFeignClient;
 import com.ustcapstone.atheleteservice.interfaces.TrainingSessionFeignClient;
 import com.ustcapstone.atheleteservice.model.Coach;
 import com.ustcapstone.atheleteservice.model.Player;
 import com.ustcapstone.atheleteservice.model.PlayerGoal;
-import com.ustcapstone.atheleteservice.model.PlayerPerformance;
-import com.ustcapstone.atheleteservice.model.PlayerPerformanceReport;
+
 import com.ustcapstone.atheleteservice.model.Team;
 import com.ustcapstone.atheleteservice.model.TrainingSession;
 import com.ustcapstone.atheleteservice.repository.AthleteRepository;
@@ -22,6 +21,7 @@ import com.ustcapstone.atheleteservice.service.AthleteService;
 
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/athletes")
@@ -41,6 +41,16 @@ public class AthleteController {
     
     
     
+    
+ // Add this endpoint to your existing Player endpoints
+    @PatchMapping("/players/{id}/weight")
+    public ResponseEntity<Void> updatePlayerWeight(@PathVariable int id, @RequestBody Map<String, Integer> request) {
+        int weight = request.get("weight");
+        athleteService.updatePlayerWeight(id, weight);
+        return ResponseEntity.noContent().build();
+    }
+
+    
     @GetMapping("/playerid-by-email")
     public ResponseEntity<Integer> getPlayerIdByEmail(@RequestParam String email) {
         return athleteRepository.findByEmail(email)
@@ -55,6 +65,8 @@ public class AthleteController {
                 .map(coach -> ResponseEntity.ok(coach.getCoachId()))
                 .orElse(ResponseEntity.notFound().build());
     }
+    
+    
     
     
     
@@ -243,39 +255,7 @@ public class AthleteController {
     
     //*******************************************************************
     // Player Endpoints
-    @Autowired
-    private PerformanceFeignClient performanceFeignClient;
-    
-    
-
-    @GetMapping("/player/{playerId}/metrics")
-    public List<PlayerPerformance> getPlayerMetrics(@PathVariable int playerId) {
-        return performanceFeignClient.getAllMetricsByPlayerId(playerId);
-    }
-
-    @GetMapping("/player/{playerId}/reports")
-    public List<PlayerPerformanceReport> getPlayerReports(@PathVariable int playerId) {
-        return performanceFeignClient.getAllReportsByPlayerId(playerId);
-    }
-
-    @GetMapping("/player/{playerId}/teammates-reports")
-    public List<PlayerPerformanceReport> getTeammatesReports(@PathVariable int playerId) {
-        int teamId =  athleteService.getTeamIdByPlayerId(playerId);
-        return performanceFeignClient.getTeamPerformanceReports(teamId);
-    }
-
-    // Coach Endpoints
-
-    @PostMapping("/coach/player/{playerId}/metrics")
-    public ResponseEntity<String> uploadMetricsForPlayer(@PathVariable int playerId, @RequestBody PlayerPerformance metrics) {
-        performanceFeignClient.addPlayerMetrics(metrics);
-        return ResponseEntity.ok("Metrics uploaded successfully");
-    }
-
-    @GetMapping("/coach/team/{teamId}/reports")
-    public List<PlayerPerformanceReport> getTeamReports(@PathVariable int teamId) {
-        return performanceFeignClient.getTeamPerformanceReports(teamId);
-    }
+   
     @GetMapping("/players/unassigned")
     public ResponseEntity<List<Player>> getUnassignedPlayers() {
         List<Player> unassignedPlayers = athleteService.getUnassignedPlayers();

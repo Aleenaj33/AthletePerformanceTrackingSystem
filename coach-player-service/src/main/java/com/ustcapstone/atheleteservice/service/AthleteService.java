@@ -103,6 +103,15 @@ public class AthleteService {
                 athleteRepository.save(player); // Save updated player
             }
         }
+        
+     // Add this method to your AthleteService class
+        public void updatePlayerWeight(int playerId, int weight) {
+            Player player = athleteRepository.findById(playerId)
+                    .orElseThrow(() -> new RuntimeException("Player not found for ID: " + playerId));
+            player.setWeight(weight); // Update the weight
+            athleteRepository.save(player); // Save changes
+        }
+
    
        
 

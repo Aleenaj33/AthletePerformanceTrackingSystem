@@ -21,6 +21,7 @@ import com.ustcapstone.atheleteservice.service.AthleteService;
 
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/athletes")
@@ -40,6 +41,16 @@ public class AthleteController {
     
     
     
+    
+ // Add this endpoint to your existing Player endpoints
+    @PatchMapping("/players/{id}/weight")
+    public ResponseEntity<Void> updatePlayerWeight(@PathVariable int id, @RequestBody Map<String, Integer> request) {
+        int weight = request.get("weight");
+        athleteService.updatePlayerWeight(id, weight);
+        return ResponseEntity.noContent().build();
+    }
+
+    
     @GetMapping("/playerid-by-email")
     public ResponseEntity<Integer> getPlayerIdByEmail(@RequestParam String email) {
         return athleteRepository.findByEmail(email)
@@ -54,6 +65,8 @@ public class AthleteController {
                 .map(coach -> ResponseEntity.ok(coach.getCoachId()))
                 .orElse(ResponseEntity.notFound().build());
     }
+    
+    
     
     
     
@@ -242,9 +255,13 @@ public class AthleteController {
     
     //*******************************************************************
     // Player Endpoints
+<<<<<<< HEAD
     
 
     
+=======
+   
+>>>>>>> 13e664a9ace9994315f4231cbb0ac2a42d08f562
     @GetMapping("/players/unassigned")
     public ResponseEntity<List<Player>> getUnassignedPlayers() {
         List<Player> unassignedPlayers = athleteService.getUnassignedPlayers();

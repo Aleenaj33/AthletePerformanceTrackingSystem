@@ -16,7 +16,7 @@ public class PerformanceReport {
     private String id; // MongoDB will automatically generate this ID
 
     private int playerId;
-    private int age;
+    private int height;
     private int weight;
     private String playerName;
     private String recordDate; // When the performance was recorded

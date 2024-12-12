@@ -19,7 +19,7 @@ public class PlayerPerformance {
     private int id;
     private int playerId;
     private String playerName;
-    private String recordDateTime;  // When the performance was recorded
+    private String recordDate;  // When the performance was recorded
 
     // Performance metrics for the player
     private int hrv;

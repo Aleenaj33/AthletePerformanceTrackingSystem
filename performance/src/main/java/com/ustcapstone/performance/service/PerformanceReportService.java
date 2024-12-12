@@ -16,42 +16,21 @@ public class PerformanceReportService {
     @Autowired
     private PerformanceReportRepository repository;
 
-    /**
-     * Create or update a performance report.
-     *
-     * @param report The performance report to save.
-     * @return The saved performance report.
-     */
     public PerformanceReport savePerformanceReport(PerformanceReport report) {
         return repository.save(report);
     }
 
-    /**
-     * Retrieve all performance reports.
-     *
-     * @return List of all performance reports.
-     */
     public List<PerformanceReport> getAllReports() {
         return repository.findAll();
     }
 
-    /**
-     * Retrieve a performance report by ID.
-     *
-     * @param id The ID of the report to retrieve.
-     * @return The found performance report, or null if not found.
-     */
+   
     public PerformanceReport getReportById(String id) {
         Optional<PerformanceReport> report = repository.findById(id);
         return report.orElse(null);
     }
 
-    /**
-     * Delete a performance report by ID.
-     *
-     * @param id The ID of the report to delete.
-     * @return true if deleted successfully, false otherwise.
-     */
+  
     public boolean deleteReportById(String id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
@@ -59,13 +38,15 @@ public class PerformanceReportService {
         }
         return false;
     }
+    public List<PerformanceReport> getReportsByPlayerId(int playerId) {
+        return repository.findByPlayerId(playerId);
+    }
 
-    /**
-     * Generate performance remarks (Amateur, Professional, Elite) based on metrics.
-     *
-     * @param report The performance report to evaluate.
-     * @return The evaluation remark.
-     */
+   
+    public List<PerformanceReport> getReportsByPlayerName(String playerName) {
+        return repository.findByPlayerName(playerName);
+    }
+
     public String generatePerformanceRemark(PerformanceReport report) {
         StringBuilder remark = new StringBuilder();
 

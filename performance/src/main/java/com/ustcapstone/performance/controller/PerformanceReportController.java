@@ -17,35 +17,20 @@ public class PerformanceReportController {
     @Autowired
     private PerformanceReportService service;
 
-    /**
-     * Endpoint to create or update a performance report.
-     *
-     * @param report The performance report to create or update.
-     * @return The created or updated performance report.
-     */
+   
     @PostMapping
     public ResponseEntity<PerformanceReport> savePerformanceReport(@RequestBody PerformanceReport report) {
         PerformanceReport savedReport = service.savePerformanceReport(report);
         return ResponseEntity.ok(savedReport);
     }
 
-    /**
-     * Endpoint to retrieve all performance reports.
-     *
-     * @return List of all performance reports.
-     */
     @GetMapping
     public ResponseEntity<List<PerformanceReport>> getAllReports() {
         List<PerformanceReport> reports = service.getAllReports();
         return ResponseEntity.ok(reports);
     }
 
-    /**
-     * Endpoint to retrieve a performance report by ID.
-     *
-     * @param id The ID of the performance report.
-     * @return The performance report if found, or 404 if not found.
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<PerformanceReport> getReportById(@PathVariable String id) {
         PerformanceReport report = service.getReportById(id);
@@ -54,13 +39,6 @@ public class PerformanceReportController {
         }
         return ResponseEntity.notFound().build();
     }
-
-    /**
-     * Endpoint to delete a performance report by ID.
-     *
-     * @param id The ID of the performance report.
-     * @return A success message if deleted, or 404 if not found.
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteReportById(@PathVariable String id) {
         boolean isDeleted = service.deleteReportById(id);
@@ -70,12 +48,6 @@ public class PerformanceReportController {
         return ResponseEntity.notFound().build();
     }
 
-    /**
-     * Endpoint to generate performance remarks for a report.
-     *
-     * @param id The ID of the performance report.
-     * @return The performance remarks as a string.
-     */
     @GetMapping("/{id}/remarks")
     public ResponseEntity<String> generatePerformanceRemark(@PathVariable String id) {
         PerformanceReport report = service.getReportById(id);
@@ -85,4 +57,26 @@ public class PerformanceReportController {
         }
         return ResponseEntity.notFound().build();
     }
+    @GetMapping("/player/{playerId}/remarks")
+    public ResponseEntity<List<String>> generatePerformanceRemarksByPlayerId(@PathVariable int playerId) {
+        List<PerformanceReport> reports = service.getReportsByPlayerId(playerId);
+        if (!reports.isEmpty()) {
+            List<String> remarks = reports.stream()
+                                          .map(service::generatePerformanceRemark)
+                                          .toList();
+            return ResponseEntity.ok(remarks);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    
+    @GetMapping("/player/{playerId}")
+    public List<PerformanceReport> getReportsByPlayerId(@PathVariable int playerId) {
+        return service.getReportsByPlayerId(playerId);
+    }
+
+    @GetMapping("/player/name/{playerName}")
+    public List<PerformanceReport> getReportsByPlayerName(@PathVariable String playerName) {
+        return service.getReportsByPlayerName(playerName);
+    }
+    
 }

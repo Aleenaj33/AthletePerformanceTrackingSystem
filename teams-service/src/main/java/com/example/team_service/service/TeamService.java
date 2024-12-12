@@ -139,6 +139,10 @@ public class TeamService {
         Team team = teamRepository.findById(teamId)
                 .orElseThrow(() -> new RuntimeException("Team not found for ID: " + teamId));
 
+
+       
+            
+
         try {
             // Remove players' team IDs
             athleteFeignClient.removePlayersTeamId(teamId,playerIds);
@@ -148,6 +152,7 @@ public class TeamService {
 
         try {
             // Update the coach's team list
+
             updateCoachTeams(team.getCoachId(), teamId, false);
         } catch (Exception e) {
             throw new RuntimeException("Failed to update coach teams: " + e.getMessage());
@@ -156,9 +161,13 @@ public class TeamService {
         try {
             // Delete the team
             teamRepository.delete(team);
+
+       
+
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete team: " + e.getMessage());
         }
+
     }
 
 

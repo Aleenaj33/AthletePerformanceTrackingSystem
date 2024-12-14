@@ -255,7 +255,7 @@ public class AthleteController {
     
     //*******************************************************************
     // Player Endpoints
-   
+
     @GetMapping("/players/unassigned")
     public ResponseEntity<List<Player>> getUnassignedPlayers() {
         List<Player> unassignedPlayers = athleteService.getUnassignedPlayers();

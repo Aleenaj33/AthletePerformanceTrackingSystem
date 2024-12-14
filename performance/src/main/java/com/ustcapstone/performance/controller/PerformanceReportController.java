@@ -6,12 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ustcapstone.performance.model.PerformanceReport;
+import com.ustcapstone.performance.model.PerformanceReportWithRemarks;
 import com.ustcapstone.performance.service.PerformanceReportService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/performance-reports")
+@RequestMapping("api/performance-reports")
 public class PerformanceReportController {
 
     @Autowired
@@ -78,5 +80,25 @@ public class PerformanceReportController {
     public List<PerformanceReport> getReportsByPlayerName(@PathVariable String playerName) {
         return service.getReportsByPlayerName(playerName);
     }
+    
+    
+
+        @GetMapping("/player/name/{playerName}/with-remarks")
+        public ResponseEntity<List<PerformanceReportWithRemarks>> getReportsWithRemarksByPlayerName(@PathVariable String playerName) {
+            List<PerformanceReport> reports = service.getReportsByPlayerName(playerName);
+            if (reports.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            List<PerformanceReportWithRemarks> response = reports.stream()
+                .map(report -> {
+                    String remarks = service.generatePerformanceRemark(report);
+                    return new PerformanceReportWithRemarks(report, remarks);
+                })
+                .collect(Collectors.toList());
+
+            return ResponseEntity.ok(response);
+        }
+        
     
 }
